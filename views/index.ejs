@@ -1,50 +1,91 @@
 <html>
-	<head>
-		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">	
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
-	</head>
-	<body>
-		<nav class="navbar">
-			
-		</nav>
-		<div class="container">
-		<section id="section1" class="panel panel-default">
+<head>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background: #222;
+            margin: 0;
+        }
 
-			<div class="panel-heading">
-			<div class="container">
-	    		<h3 class="panel-title">POSTing a file to Amazon S3</h3>
-	    		</div>
-		  	</div>
-	  		<div class="panel-body">
-	  <form action="https://<%=bucket%>.s3.amazonaws.com/" method="POST" id="sign-up-form" class="form-horizontal" enctype="multipart/form-data">	
-	
-	<div class="container">
-	<% fields.forEach(function(elem){ %>
-	  <input type="hidden" name="<%= elem.name  %>" value="<%=elem.value %>"/>
-		<%}); %> 
-	   
-	<div class="col-xs-5">
-	<div class="form-group">
-    	<label for="exampleInputFile">File input</label>
-    	<input type="file" name="file">
-    	<p class="help-block">File will be send to the bucket <%=bucket%> </p>
-  </div>
-	
-  	
-	</div>
-	</div>
-	
-	<div class="container">
-	<div class="col-xs-3">
-	<input type="submit" class="btn  btn-primary btn-block" value="Confirm"/>
-	</div>
-	</div>
+        .thumbnails img {
+            height: 80px;
+            border: 4px solid #555;
+            padding: 1px;
+            margin: 0 10px 10px 0;
+        }
+
+        .thumbnails img:hover {
+            border: 4px solid #00ccff;
+            cursor: pointer;
+        }
+
+        .preview img {
+            border: 4px solid #444;
+            padding: 1px;
+            width: 800px;
+        }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<nav class="navbar">
+</nav>
+
+<form action="/refactor" method="POST" id="test"
+      class="form-horizontal" enctype="multipart/form-data">
+    <div style="margin: 0 auto; width: 60%">
+        <% urlList.forEach(function(elem, val){ %>
+        <div style="margin: 0 auto; float: left">
+            <img src="<%= elem.url %>" >
+            <input type="checkbox" name="check<%= val %>" value="<%= elem.name %>">
+        </div>
+        <% }); %>
+    </div>
+    <input type="hidden" name="counter" value="<%= urlList.length %>">
+    <input style="width:100px" type="submit" class="btn  btn-primary btn-block" value="Confirm"/>
 </form>
-	  		</div>
-			<footer class="panel-footer">
-				
-			</footer>
-		</section>
-	</div>		
-	</body>
+
+
+<div style="clear:both"></div>
+<br>
+<div class="container">
+    <section id="section1" class="panel panel-default">
+        <div class="panel-heading">
+            <div class="container">
+                <h3 class="panel-title">POSTing a file to Amazon S3</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="https://<%= bucket %>.s3.amazonaws.com/" method="POST" id="sign-up-form"
+                  class="form-horizontal" enctype="multipart/form-data">
+
+                <div class="container">
+                    <% fields.forEach(function(elem){ %>
+                    <input type="hidden" name="<%= elem.name %>" value="<%= elem.value %>"/>
+                    <% }); %>
+
+                    <div class="col-xs-5">
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" name="file">
+                            <p class="help-block">File will be send to the bucket <%= bucket %> </p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="col-xs-3">
+                        <input type="submit" class="btn  btn-primary btn-block" value="Confirm"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <footer class="panel-footer">
+
+        </footer>
+    </section>
+</div>
+</body>
 </html>
