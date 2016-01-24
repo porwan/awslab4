@@ -36,7 +36,7 @@
     <div style="margin: 0 auto; width: 60%">
         <% urlList.forEach(function(elem, val){ %>
         <div style="margin: 0 auto; float: left">
-            <img src="<%= elem.url %>" >
+            <img src="<%= elem.url %>" height="200px" width="200px">
             <input type="checkbox" name="check<%= val %>" value="<%= elem.name %>">
         </div>
         <% }); %>
